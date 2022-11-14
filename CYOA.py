@@ -253,6 +253,7 @@ def table_1_sit():
     print(f'Prison Strikes: {pstrike}')
     print("-" * 25)
 
+    time.sleep(4)
     check_stats()
 
 
@@ -271,6 +272,8 @@ def table_2_sit():
     print(f'Prison Strikes: {pstrike}')
     print("-" * 25)
 
+
+    time.sleep(4)
     check_stats()
 
 
@@ -415,7 +418,6 @@ def dont_share_food():
     global health, reputation
     health = health + 25
     reputation = reputation - 10
-
     print("\n")
     print("-" * 25)
     print("The prisoner grungily walks away from your antics annoyed over your decision, you casually find a place to sit")
@@ -429,7 +431,6 @@ def dont_share_food():
 
     time.sleep(6)
     check_stats()
-
 
 
 def phone_call():
@@ -451,7 +452,7 @@ def phone_call():
     elif command == "call mom":
         call_mom()
     elif command == "call sister":
-        call_sister
+        call_sister()
     elif command == "take parts":
         steal_part()
     else:
@@ -459,13 +460,14 @@ def phone_call():
         phone_call()
 
 
- def call_random_number():
+
+def call_random_number():
     global metal
     metal = metal + 1
 
     print("\n")
     print("-" * 25)
-    print("You call a random number,  connecting with a random person who owns a junk yard. You as for a simple request ")
+    print("You call a random number,  connecting with a random person who owns a junk yard. You as for a simple request")
     print("for some leftover metal to be sent to you, as he reluctantly agrees, ignorant to the fact you are a prisoner.")
     print("After your phone call, the guards raise suspission before returning you to your cell")
     print("-" * 25)
@@ -539,15 +541,207 @@ def cell_confinment():
         cell_confinment()
 
 def talk_cellmate():
+    print("\n")
+    print("-" * 25)
+    print("In Bordem, You casually engage in a conversation with your cell mate ")
+    print("eventaully leading you towards a heated dissagrement about Politics")
+    print("how will you settle this disagreement?")
+    print("-" * 25)
+    print("disregard : disregard the conversation in attempts to switch topics")
+    print("attack : settle your dissagrement by attacking him")
+    print("-" * 25)
+    command = input("what option would you like to pick\n").lower()
+
+    if command == "disregard":
+        disregard_convo()
+    elif command == "attack":
+        convo_attack()
+    else:
+        print("Hmmm, seems like that didn't work, try again")
+        talk_cellmate()
+
+def disregard_convo():
+    global reputation
+    reputation = reputation + 15
+
+    print("\n")
+    print("-" * 25)
+    print("You and your cellmate manage to settle out a conversation after your expressed dissagrements")
+    print("switching topics and chatting until the night goes down.")
+    print("-" * 25)
+    print(f'Health: {health}')
+    print(f'Reputation : {reputation}')
+    print(f'Prison Strikes: {pstrike}')
+    print("-" * 25)
+
+
+    time.sleep(6)
+    check_stats()
+def convo_attack():
+    global health, pstrike, reputation
+    print("\n")
+    print("-" * 25)
+    print("You make a move by setting in a few punches, you shocks your cellmate eventually reciprocating himself")
+
+    if health <= 50:
+        health = health - 45
+        pstrike = pstrike + 1
+
+
+        print("His impactful punches causes you to be immediatly be knocked out, hitting hard on the ground")
+        print("Guards eventually swarm the cell, with you regaining your consciousness, the officers give both")
+        print("you and your cellmate are both given prison strikes, followed by the guards determining its lights out")
+        print("locking down all the cells.")
+    elif health > 50:
+        pstrike = pstrike + 1
+        health = health - 15
+        reputation = reputation + 30
+
+        print("With rage fueling yourself, you set in a attack that knocks him down, ultimately  winning the fight")
+        print("standing as the victor. While hearing the cell block roar with cheers from all the other inmates")
+        print("you enjoy your quick jolt of fame, before being tackled by a set of guards rushing into the cell.")
+        print("As a result, the guards give both of you a prison strike, begining lights out early")
+
+    print("-" * 25)
+    print(f'Health: {health}')
+    print(f'Reputation : {reputation}')
+    print(f'Prison Strikes: {pstrike}')
+    print("-" * 25)
+
+
+    time.sleep(6)
+    check_stats()
+
 
 def trade_cellmate():
+    global circuit_board, metal, battery, stick, white_outfit
 
+    print("\n")
+    print("-" * 25)
+    print("In Bordem, you ask your cellmate to trade owned items to pass time ")
+    print("He reluctulantly agrees while proprosing a few trades for you")
+    print("-" * 25)
+    print_inventory()
+    print("-" * 25)
+    print("one : give metal, get circuit board")
+    print("two: give battery, get Metal")
+    print("three: give stick, get white outfit")
+    print("back : nevermind I dont want to trade")
+    print("-" * 25)
+    command = input("what option would you like to pick\n").lower()
+
+    if command == "one" and metal > 0:
+        metal = metal - 1
+        circuit_board = circuit_board + 1
+
+        print("-" * 25)
+        print("Your cellmate agrees with your decision and gives you the item of choice")
+        print("you store away your new item in your compartment, potentially to use later in the night ")
+        print("-" * 25)
+    elif command == "two" and battery > 0:
+        battery = battery - 1
+        metal = metal + 1
+
+        print("-" * 25)
+        print("Your cellmate agrees with your decision and gives you the item of choice")
+        print("you store away your new item in your compartment, potentially to use later in the night ")
+        print("-" * 25)
+    elif command == "three" and stick > 0:
+        stick = stick - 1
+        white_outfit = white_outfit + 1
+
+        print("-" * 25)
+        print("Your cellmate agrees with your decision and gives you the item of choice")
+        print("you store away your new item in your compartment, potentially to use later in the night ")
+        print("-" * 25)
+    elif command == "back":
+        cell_confinment()
+    else:
+        print("Hmmm, seems like that didn't work, try again")
+        trade_cellmate()
+
+    print_inventory()
+    time.sleep(6)
+    check_stats()
 
 def doctor_checkup():
-    print("doctor check up printed")
+    global health
 
+    print("\n")
+    print("-" * 25)
+    print("Activity: Doctor Checkup")
+    print("\n")
+    print("Which doctor would you like to be checked by")
+    print("-" * 25)
+    print("dr.lidia")
+    print("dr.calvin")
+    print("dr.emily")
+    print("dr.hank")
+    print("-" * 25)
+    command = input("enter your option here: \n").lower()
 
+    if command == "dr.lidia":
+        health = health + 35
+
+        print("-" * 25)
+        print("You go up to dr.Lidia whereas she goes through a extensive set of medication assigning you to a set of daily pills")
+        print("to help with general health, you walk back to your cell block feeling better then ever"
+              "")
+    elif command == "dr.calvin":
+        health = health + 5
+        print("-" * 25)
+        print("You line up to be checked up my Dr. Calvin whereas he goes through a simple heart rate check")
+        print("before deeming good to go. overall having little impact on your health, you grudgily walk back to your cell block feeling much the same")
+
+    elif command == "dr.emily":
+        health = health +25
+        print("-" * 25)
+        print("upon walking up to get checked by Dr.Emily, she glances at your file before providing polio ")
+        print("and covid vaccinations missing, before deeming you good to go. you walk back to your cell block ")
+        print("with a sore arm, knowing its for the better")
+    elif command == "dr.hank":
+        dr_hank()
+
+    else:
+        print("hmmm that didnt seem to work, Try again")
+        doctor_checkup()
+
+    print("-" * 25)
+    print(f'Health: {health}')
+    print(f'Reputation : {reputation}')
+    print(f'Prison Strikes: {pstrike}')
+    print("-" * 25)
+
+    time.sleep(6)
+    check_stats()
     #check stats
+
+
+def dr_hank():
+    global health
+    print("-" * 25)
+    print("Upon entering the room for check up, Dr. Hank presents a blue formula newly created aiding general health.")
+    print("Do you take it?")
+    print("-" * 25)
+    print("yes")
+    print("no")
+    print("-" * 25)
+    option = input("enter your option here: \n").lower()
+
+    if option == "yes":
+        health = health + 50
+        print("-" * 25)
+        print( "You gulp down the newly created blue formula, feeling as sence of increased mood and strength, helping tremendously.")
+        print("Dr.Hank deems you good to go, letting you out of his office")
+        print("You start to walk back to your cell block feeling better than ever")
+    elif option == "no":
+        health = health + 5
+        print("-" * 25)
+        print("Dr.hank understands you choice and proceeds with a  general hearbeat, ear checkup before assigning you good to go")
+        print("you think to yourself that the assesment did not help that much, whhile making your way back to your cell block")
+    else:
+        print("hmmm that didnt seem to work, Try again")
+        dr_hank()
 
 def check_stats():
     if day == 10:
@@ -647,7 +841,7 @@ def craft_items():
     print("\n")
     print("-" * 25)
     print("What would you like to craft?")
-    print("-"*25)
+    print_inventory()
     print("crowbar: metal + metal")
     print("shovel: Stick + metal")
     print("guard outfit: White outfit + Blue dye")
@@ -656,13 +850,13 @@ def craft_items():
     print("-"*25)
     command = input("Insert option here: \n").lower()
 
-    if command == "crowbar" and metal == 2:
+    if command == "crowbar" and metal > 1:
         craft_crowbar()
-    elif command == "shovel" and metal == 1 and stick == 1:
+    elif command == "shovel" and metal > 0 and stick > 0:
         craft_shovel()
-    elif command == "guard outfit" and white_outfit == 1 and blue_dye == 1:
+    elif command == "guard outfit" and white_outfit > 0 and blue_dye > 0:
         craft_guard_outfit()
-    elif command == "keycard" and circuit_board == 1 and battery == 1:
+    elif command == "keycard" and circuit_board > 0 and battery > 0:
         craft_keycard()
     elif command == "back":
         cell_time()
@@ -689,7 +883,8 @@ def craft_shovel():
 
     print("\n")
     print("-"*25)
-    print("You successfully manage to craft a shovel \n")
+    print("You successfully manage to craft a shovel")
+    print("-" * 25)
 
     cell_time()
 
@@ -702,7 +897,8 @@ def craft_guard_outfit():
 
     print("\n")
     print("-"*25)
-    print("You successfully manage to craft a guard outfit \n")
+    print("You successfully manage to craft a guard outfit")
+    print("-" * 25)
 
     cell_time()
 
@@ -715,7 +911,8 @@ def craft_keycard():
 
     print("\n")
     print("-"*25)
-    print("You successfully manage to craft a keycard \n")
+    print("You successfully manage to craft a keycard ")
+    print("-" * 25)
 
     cell_time()
 
@@ -723,6 +920,7 @@ def craft_keycard():
 def escape_options():
     print("\n")
     print("-" * 25)
+    crafted_inventory()
     print("Next:")
     print("you decide that tonight is the night to strike and take action and escape")
     print("what method of escape will you use ")
@@ -734,6 +932,7 @@ def escape_options():
     print("riot : requires a reputation of 100")
     print("back: nevermind I change my mind")
     print("-"*25)
+
     user = input("Input your method of escape here:\n")
 
     print("-"*25)
@@ -745,7 +944,7 @@ def escape_options():
         shovel_escape()
     elif user == "guard_outfit" and guard_outfit == True:
         outfit_escape()
-    elif user == "riot" and reputation == 100:
+    elif user == "riot" and reputation > 99:
         riot_escape()
     elif user == "back":
         cell_time()
@@ -854,6 +1053,15 @@ def print_inventory():
     print(f'Stick: {stick}')
     print("-" * 25)
 
+def crafted_inventory():
+    print("-" * 25)
+    print("Inventory:")
+    print(f'Crowbar : {crowbar}')
+    print(f'Shovel: {shovel}')
+    print(f'Keycard: {keycard}')
+    print(f'Guard Outfit: {guard_outfit}')
+
+    print("-" * 25)
 
 #main
 
@@ -882,3 +1090,4 @@ keycard = False
 guard_outfit = False
 
 game_start()
+
